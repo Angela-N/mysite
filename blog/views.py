@@ -63,11 +63,21 @@ class PostDraftListView(LoginRequiredMixin, ListView):
         return Post.objects.fteilter(published_date__isnull=True).order_by('-created_date')
 
 
-#####functions that require primary keys######
+#####views/functions that require primary keys######
+
+# publish post
+@login_required
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect('blog:post_detail', pk=pk)
+
+
+# add coment to post
 @login_required
 def add_comment_to_post(request, pk):
     # varaible storing the post
-    post = get_object_or_404(Post, pk)
+    post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -79,12 +89,21 @@ def add_comment_to_post(request, pk):
         form = CommentForm()
     return render(request, 'blog/comment_form.html', {'form': form})
 
-#approve comment
+
+# approve comment
 @login_required
 def comment_approve(request, pk):
-    comment = get_object_or_404(Comment, pk)
+    comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
     return redirect('blog:post_detail', pk=comment.post.pk)
 
-#remove comment
-#publish comment
+
+# remove comment
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    # create temporary pk before you delete the pk
+    temp_post_pk = comment.post.pk
+    comment.delete()
+    # comment.post is showing that its related to the post
+    return redirect('blog:post_detail', pk=temp_post_pk)
