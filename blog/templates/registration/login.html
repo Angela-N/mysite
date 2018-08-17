@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+{% extends 'blog/base.html' %}
 
-</body>
-</html>
+{% block title %}
+    <title> login </title>
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h2>Please Login: </h2>
+        <h3> (Must be Super User to Login. Contact the site admins for issues) </h3>
+
+        {% if form.errors %}
+            <p>Your user name or password is incorrect! Please try again. </p>
+        {% endif %}
+
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary" value="Login">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+
+
+    </div>
+{% endblock %}
