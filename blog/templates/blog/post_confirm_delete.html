@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'blog/base.html' %}
 
-</body>
-</html>
+{% block title %}
+    <title>Confirm Delete</title>
+{% endblock %}
+{% block content %}
+    <form method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to delete {{ object }}?</p>
+        <input type="submit" class="btn btn-danger" value="Confirm Delete">
+    </form>
+    <button class="btn btn-default">
+        <a href="{% url 'blog:post_detail' pk=object.pk%}">Cancel</a>
+    </button>
+{% endblock %}

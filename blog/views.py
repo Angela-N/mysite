@@ -33,7 +33,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     redirect_field_name = 'blog/post_detail.html'
 
     # gets attributes of the post form
-    form = PostForm
+    form_class = PostForm
 
     model = Post
 
@@ -60,7 +60,7 @@ class PostDraftListView(LoginRequiredMixin, ListView):
     model = Post
 
     def get_queryset(self):
-        return Post.objects.fteilter(published_date__isnull=True).order_by('-created_date')
+        return Post.objects.filter(published_date__isnull=True).order_by('-created_date')
 
 
 #####views/functions that require primary keys######
