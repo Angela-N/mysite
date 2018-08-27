@@ -18,21 +18,34 @@
     text-align: center;
 }
 
-.loader {
-    filter: hue-rotate(0deg);
-    color: linear-gradient(45deg, #0f8, #08f);
-    animation: hue 10000ms infinite linear;
-}
-
 .post-content {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5em;
 }
 
-.date {
-
+.loader {
+    filter: hue-rotate(0deg);
+    background: linear-gradient(45deg, #0f8, #08f);
+    animation: hue 10000ms infinite linear;
 }
 
+.info {
+    padding: 5px 15px;
+    color: #eee;
+    background-color: rgba(0, 0, 0, .5);
+}
+body {
+    font-family: Helvetica sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #222;
+    overflow: hidden;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+         -o-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
 @keyframes spinify {
     0% {
         transform: translate(0px, 0px);
@@ -66,4 +79,40 @@
         filter: hue-rotate(360deg);
     }
 
+}
+
+/*Text grad*/
+
+@-webkit-keyframes animationgradienttitle {
+    0% {
+        background-position: 0 1600px;
+    }
+    100% {
+        background-position: 1600px 0;
+    }
+}
+
+@keyframes animationgradienttitle {
+    0% {
+        background-position: 0 1600px;
+    }
+    100% {
+        background-position: 1600px 0;
+    }
+}
+
+.gradient-text {
+    color: #fc3735;
+    background: -webkit-linear-gradient(left, #F57170, #10DDC2, #F57170);
+    background-size: 1600px 200px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-name: animationgradienttitle;
+    animation-name: animationgradienttitle;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }

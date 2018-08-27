@@ -2,19 +2,20 @@
 
 {% block title %}
     <title>Posts</title>
+    <scrict src="blog/blog.js"></scrict>
 {% endblock %}
 
 {% block content %}
-    <div class="centerstage">
+    <div class="centerstage info">
         {% for post in post_list %}
             <div class="post">
                 <h1>
-                    <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
+                    <a class="gradient-text" href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
                 </h1>
                 <div class="date">
                     <p>Published on: {{ post.published_date|date:'D M Y' }}</p>
                 </div>
-                <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.approve_comments.count }}comments</a>
+                <a href="{% url 'blog:post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
             </div>
         {% endfor %}
     </div>

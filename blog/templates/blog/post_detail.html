@@ -8,10 +8,10 @@
     <h1 class="post-title loader">{{ post.title }}</h1>
     {% if post.published_date %}
         <div class="date post-date">
-            <p>{{ post.published_date }}</p>
+            <p>Published on: {{ post.published_date }}</p>
         </div>
     {% else %}
-        <a class="btn btn-default" href="{% url 'blog:post_publish' pk=post.pk %}">Publish</a>
+        Click to <a class="btn btn-default" href="{% url 'blog:post_publish' pk=post.pk %}">Publish</a>
     {% endif %}
 
     <p class="post-content">{{ post.text|safe|linebreaksbr }}</p>
@@ -28,21 +28,25 @@
     <hr>
 
     <a class="btn btn-primary" href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Add Comment</a>
+    <br>
 
     <div class="container">
         {% for comment in post.comments.all %}
-            {% if user.is_authenticated or comment.approve_comment %}
-                {{ comment.created_date }}
+            {% if user.is_authenticated or comment.approved_comment %}
+
                 <p>{{ comment.text|safe|linebreaksbr }}</p>
-                <p>Posted by <strong>{{ comment.author }}</strong></p>
-                {% if not comment.approve %}
+                <p>Posted by <strong>{{ comment.author }}</strong> on: {{ comment.created_date }}</p>
+
+                {# if comment is not approved. From field model #}
+                {% if not comment.approved_comment %}
                     <a href="{% url 'blog:comment_approve' pk=comment.pk %}">
-                        <span>glyphicon glyphicon-ok</span>
+                        <span class="glyphicon glyphicon-ok"></span>
                     </a>
-                    <a href="{% url 'blog:comment_remove' pk=comment.pk %}">
-                        <span> glyphicon glyphicon-trash</span>
-                    </a>
+                    &nbsp;
                 {% endif %}
+                <a href="{% url 'blog:comment_remove' pk=comment.pk %}">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
             {% endif %}
         {% empty %}
             <p>No Comments Posted</p>

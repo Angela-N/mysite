@@ -31,13 +31,13 @@
             <ul class="nav navbar-nav">
                 <li><a class="navbar-brand bigbrand" href="{% url 'blog:post_list' %}">My Tech Blog</a></li>
                 <li><a class="navbar-brand bigbrand" href="{% url 'blog:about' %}">About</a></li>
-                <li><a class="navbar-brand bigbrand" href="https://github.com/Angela-N/web">Github</a></li>
-                <li><a class="navbar-brand bigbrand" href="https://linkedIn.com">LinkedIn</a></li>
+                <li><a class="navbar-brand bigbrand" href="https://github.com/Angela-N/web" target="_blank">Github</a></li>
+                <li><a class="navbar-brand bigbrand" href="https://linkedIn.com" target="_blank">LinkedIn</a></li>
             </ul>
-            <ul class="nav navbar-nav-navbar-right">
+            <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'blog:post_new' %}"> New Post</a></li>
-                    <li><a href="{% url 'blog:post_draft_list' %}"> Draft</a></li>
+                    <li><a href="{% url 'blog:post_draft_list' %}"> Drafts</a></li>
                     <li><a href="{% url 'logout' %}"> Logout</a></li>
                     <li><a> Welcome {{ user.username }}</a></li>
                 {% else %}
@@ -45,7 +45,6 @@
                         <span class="glyphicon glyphicon-user"></span>
                     </a></li>
                 {% endif %}
-
             </ul>
         </div>
     </nav>

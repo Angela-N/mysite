@@ -43,7 +43,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     redirect_field_name = 'blog/post_detail.html'
 
     # gets attributes of the post form
-    form = PostForm
+    form_class = PostForm
 
     model = Post
 
@@ -56,6 +56,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 class PostDraftListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_draft_list.html'
+    template_name = 'blog/post_draft_list.html'
 
     model = Post
 
